@@ -32,6 +32,8 @@ class OpHandlersContainer:
         except StagingDataException:
             usr_journal = None
 
+        self.ds.pre_commit()
+
         if usr_journal is not None:
             try:
                 self.ds.lock_data(rpc.username)
@@ -44,6 +46,8 @@ class OpHandlersContainer:
             self.ds.drop_user_journal(rpc.username)
         else:
             commit_res = False
+
+        self.ds.post_commit()
 
         ret_data = {
             "status": "OK",
