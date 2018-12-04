@@ -32,7 +32,7 @@ class OpHandlersContainer:
         except StagingDataException:
             usr_journal = None
 
-        self.ds.pre_commit()
+        self.ds.pre_commit(rpc.username)
 
         if usr_journal is not None:
             try:
@@ -47,7 +47,7 @@ class OpHandlersContainer:
         else:
             commit_res = False
 
-        self.ds.post_commit()
+        self.ds.post_commit(rpc.username)
 
         ret_data = {
             "status": "OK",

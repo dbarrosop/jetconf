@@ -696,11 +696,11 @@ class BaseDatastore:
         raise NotImplementedError("Not implemented in base class")
 
     # Execute as part of the commit operation before committing the changes
-    def pre_commit(self):
+    def pre_commit(self, username: str):
         raise NotImplementedError("Not implemented in base class")
 
     # Execute as part of the commit operation after committing the changes
-    def post_commit(self):
+    def post_commit(self, username: str):
         raise NotImplementedError("Not implemented in base class")
 
 
@@ -710,10 +710,10 @@ class JsonDatastore(BaseDatastore):
         super().__init__(dm, with_nacm)
         self.json_file = json_file
 
-    def pre_commit(self):
+    def pre_commit(self, username: str):
         pass
 
-    def post_commit(self):
+    def post_commit(self, username: str):
         pass
 
     def load(self):
