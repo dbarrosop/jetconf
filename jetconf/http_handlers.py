@@ -286,6 +286,7 @@ class HttpHandlersImpl:
                     ERRTAG_OPFAILED,
                     exception=e
                 )
+
             finally:
                 self.ds.unlock_data()
 
@@ -777,6 +778,13 @@ class HttpHandlersImpl:
                 HttpStatus.BadRequest,
                 RestconfErrType.Protocol,
                 ERRTAG_INVVALUE,
+                exception=e
+            )
+        except Exception as e:
+            http_resp = HttpResponse.error(
+                HttpStatus.InternalServerError,
+                RestconfErrType.Protocol,
+                ERRTAG_OPFAILED,
                 exception=e
             )
 
